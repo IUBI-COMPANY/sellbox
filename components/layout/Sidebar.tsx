@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {Home, Search, Bell, User, Settings, UploadIcon} from 'lucide-react';
+import {Home, Search, Bell, User, Settings, UploadIcon, LogsIcon} from 'lucide-react';
 import Logo from '@/components/ui/Logo';
 import type { ReactNode } from 'react';
 
@@ -16,9 +16,9 @@ const navItems: NavItem[] = [
   { href: '/', label: 'Inicio', icon: <Home className="w-5 h-5" /> },
   { href: '/explore', label: 'Explorar', icon: <Search className="w-5 h-5" /> },
   {
-    href: '/notifications',
-    label: 'Notificaciones',
-    icon: <Bell className="w-5 h-5" />,
+    href: '/history',
+    label: 'Historial',
+    icon: <LogsIcon className="w-5 h-5" />,
   },
   { href: '/upload', label: 'Subir video', icon: <UploadIcon className="w-5 h-5" /> },
   { href: '/profile', label: 'Perfil', icon: <User className="w-5 h-5" /> },
@@ -28,7 +28,8 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 flex-col w-16 xl:w-60 transition-all duration-300">
+    <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 flex-col w-16 xl:w-60 transition-all duration-300  overflow-auto">
+        <div className="scroll-container min-h-screen flex flex-col justify-between w-full border-r border-border/50 bg-background/80 backdrop-blur-md">
       {/* Logo */}
       <div className="h-16 flex items-center justify-center xl:justify-start xl:px-5">
         <div className="xl:hidden">
@@ -48,7 +49,7 @@ export default function Sidebar() {
                   <input
                       type="text"
                       placeholder="Buscar productos, videos, creadores..."
-                      className="w-full bg-gray-700/30 rounded-full pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 hover:-hover"
+                      className="w-full bg-gray-700/30 hover:bg-gray-700/50 rounded-full pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 hover:-hover"
                   />
               </div>
           </div>
@@ -101,6 +102,7 @@ export default function Sidebar() {
           </span>
         </Link>
       </div>
+        </div>
     </aside>
   );
 }

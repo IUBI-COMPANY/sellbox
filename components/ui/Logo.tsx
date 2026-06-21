@@ -45,7 +45,7 @@ export default function Logo({ size = 'md', className = '' }: LogoProps) {
       {/* Text */}
       <span className={`${styles.text} font-bold tracking-tight`}>
         <span className="text-gradient">Sell</span>
-        <span className="text-white">box</span>
+        <span className="text-white">Box</span>
       </span>
     </Link>
   );
