@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import {Home, Search, Bell, User, Settings, UploadIcon, LogsIcon} from 'lucide-react';
+import {usePathname} from 'next/navigation';
+import {Home, LogsIcon, Search, Settings, UploadIcon, User} from 'lucide-react';
 import Logo from '@/components/ui/Logo';
-import type { ReactNode } from 'react';
+import type {ReactNode} from 'react';
+import { useTheme} from "@/components/providers/ThemeProvider"
 
 interface NavItem {
   href: string;
@@ -26,6 +27,9 @@ const navItems: NavItem[] = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const theme = useTheme();
+
+    const { resolvedTheme = null} = theme;
 
   return (
     <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 flex-col w-16 xl:w-60 transition-all duration-300  overflow-auto">
@@ -49,7 +53,7 @@ export default function Sidebar() {
                   <input
                       type="text"
                       placeholder="Buscar productos, videos, creadores..."
-                      className="w-full bg-gray-700/30 hover:bg-gray-700/50 rounded-full pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 hover:-hover"
+                      className={`"w-full bg-gray-700/30 ${resolvedTheme === "dark" ? "hover:bg-gray-700/40" : "hover:bg-gray-700/20"} rounded-full pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 hover:-hover"`}
                   />
               </div>
           </div>

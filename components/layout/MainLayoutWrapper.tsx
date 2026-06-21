@@ -22,9 +22,9 @@ export default function MainLayoutWrapper({
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Render Navbar: on home page, it is desktop-only; otherwise, it is always visible */}
-      <div className={isHome ? 'hidden lg:block' : 'block'}>
-        {navbar}
-      </div>
+        {navbar && <div className={isHome ? 'hidden lg:block' : 'block'}>
+            {navbar}
+        </div>}
       
       {/* Sidebar (desktop only, handled in Sidebar component) */}
       {sidebar}
@@ -34,7 +34,7 @@ export default function MainLayoutWrapper({
         className={`
           transition-all duration-300
           ${isHome 
-            ? 'h-screen w-full lg:pt-16 lg:pl-16 xl:pl-60 relative overflow-hidden' 
+            ? 'h-screen w-full lg:pl-16 xl:pl-60 relative overflow-hidden' 
             : 'pt-16 pb-20 md:pb-4 lg:pl-16 xl:pl-60'}
         `.trim()}
       >
