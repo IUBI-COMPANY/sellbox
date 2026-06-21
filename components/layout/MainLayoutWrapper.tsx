@@ -5,14 +5,14 @@ import { usePathname } from 'next/navigation';
 
 interface MainLayoutWrapperProps {
   children: React.ReactNode;
-  navbar: React.ReactNode;
+  navbar?: React.ReactNode;
   sidebar: React.ReactNode;
   bottomTabs: React.ReactNode;
 }
 
 export default function MainLayoutWrapper({
   children,
-  navbar,
+  navbar = null,
   sidebar,
   bottomTabs,
 }: MainLayoutWrapperProps) {

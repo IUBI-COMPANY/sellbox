@@ -34,7 +34,6 @@ export default async function MainLayout({
 
   return (
     <MainLayoutWrapper
-      navbar={<Navbar user={userPayload} />}
       sidebar={<Sidebar />}
       bottomTabs={<BottomTabs />}
     >
