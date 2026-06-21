@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {useTheme} from "@/components/providers/ThemeProvider";
 
 type LogoSize = 'sm' | 'md' | 'lg';
 
@@ -14,7 +15,9 @@ const sizeStyles: Record<LogoSize, { text: string; icon: string }> = {
 };
 
 export default function Logo({ size = 'md', className = '' }: LogoProps) {
+  const theme = useTheme();
   const styles = sizeStyles[size];
+  const { resolvedTheme = null} = theme;
 
   return (
     <Link
@@ -45,7 +48,7 @@ export default function Logo({ size = 'md', className = '' }: LogoProps) {
       {/* Text */}
       <span className={`${styles.text} font-bold tracking-tight`}>
         <span className="text-gradient">Sell</span>
-        <span className="text-white">Box</span>
+        <span className={resolvedTheme === "dark" ? "text-black" : "text-white"}>Box</span>
       </span>
     </Link>
   );
