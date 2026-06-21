@@ -159,7 +159,7 @@ export default function FeedPage() {
         {/* Home Feed Container */}
         <div
           ref={containerRef}
-          className="h-auto w-auto lg:h-[calc(100vh-2rem)] lg:my-4 overflow-y-scroll snap-y snap-mandatory scrollbar-none relative"
+          className="h-auto w-auto lg:h-[calc(100vh-2rem)] overflow-y-scroll snap-y snap-mandatory scrollbar-none relative"
         >
           {/* Video Snapping List */}
           {videos.map((video, index) => {
@@ -168,7 +168,7 @@ export default function FeedPage() {
             return (
               <div
                 key={video.id}
-                className="components-wrapper h-full w-full snap-start snap-always relative flex gap-4"
+                className="components-wrapper h-full w-full lg:my-4 snap-start snap-always relative flex gap-4"
               >
                 <VideoComponent
                   index={index}
