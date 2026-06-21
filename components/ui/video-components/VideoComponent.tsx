@@ -28,7 +28,7 @@ export default function VideoComponent({
   };
 
   return (
-    <section className="video-wrapper relative w-full h-full  bg-linear-to-b bg-black from-black/60 to-transparent lg:rounded-3xl lg:border lg:border-border/40 overflow-hidden">
+    <section className="items-wrapper relative w-full min-w-[27vw]  h-auto min-h-[calc(100vh-5rem)] bg-linear-to-b bg-black from-black/60 to-transparent lg:rounded-3xl lg:border lg:border-border/40 overflow-hidden">
       {/* Transparent Header */}
       <header className="absolute w-full top-0 left-0 right-0 z-30 flex items-center justify-between px-4 py-4">
         <button
@@ -37,7 +37,6 @@ export default function VideoComponent({
         >
           <Menu className="w-6 h-6" />
         </button>
-
         <div className="flex gap-4 text-white font-semibold text-lg">
           <span className="border-b-2 border-accent pb-1 cursor-pointer">
             Inicio
@@ -46,7 +45,6 @@ export default function VideoComponent({
             Siguiendo
           </span>
         </div>
-
         <button className="p-2 rounded-full bg-black/20 backdrop-blur-md text-white hover:bg-black/40 transition-colors">
           <Search className="w-6 h-6" />
         </button>
@@ -63,7 +61,7 @@ export default function VideoComponent({
         className="h-full w-full object-cover cursor-pointer"
       />
       {/* Bottom Overlay (Info details & WhatsApp CTA) */}
-      <div className="absolute w-full left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
+      <div className="absolute w-full left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-linear-to-t from-black/80 via-black/40 to-transparent text-white">
         <div className="space-y-2 w-full">
           {/* Creator Info */}
           <div className="flex items-center gap-2">
@@ -81,12 +79,10 @@ export default function VideoComponent({
               Más videos
             </button>
           </div>
-
           {/* Description */}
           <p className="text-sm text-neutral-200 line-clamp-2 leading-relaxed mb-4">
             {video.description}
           </p>
-
           {/* WhatsApp Purchase CTA */}
           <a
             href={video.product.whatsapp_link}

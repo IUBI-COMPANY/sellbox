@@ -48,7 +48,7 @@ export default function Sidebar() {
   const { resolvedTheme = null } = theme;
 
   return (
-    <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 flex-col w-16 xl:w-60 transition-all duration-300  overflow-auto">
+    <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 flex-col w-16 xl:w-60 transition-all duration-300 overflow-auto">
       <div className="scroll-container min-h-screen flex flex-col justify-between w-full border-r border-border/50 bg-background/80 backdrop-blur-md">
         {/* Logo */}
         <div className="h-16 flex items-center justify-center xl:justify-start xl:px-5">

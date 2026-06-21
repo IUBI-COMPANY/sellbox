@@ -159,7 +159,7 @@ export default function FeedPage() {
         {/* Home Feed Container */}
         <div
           ref={containerRef}
-          className="h-auto w-auto lg:h-[calc(100vh-2rem)] overflow-y-scroll snap-y snap-mandatory scrollbar-none relative"
+          className="h-auto w-full lg:h-screen relative overflow-y-scroll snap-y snap-mandatory scrollbar-none"
         >
           {/* Video Snapping List */}
           {videos.map((video, index) => {
@@ -168,21 +168,34 @@ export default function FeedPage() {
             return (
               <div
                 key={video.id}
-                className="components-wrapper h-full w-full lg:my-4 snap-start snap-always relative flex gap-4"
+                className="components-wrapper h-full w-full flex justify-center items-center"
               >
-                <VideoComponent
-                  index={index}
-                  video={video}
-                  videoRefs={videoRefs}
-                  onSetMenuOpen={setMenuOpen}
-                />
-                <VideoActions
-                  index={index}
-                  currentVideoIndex={currentVideoIndex}
-                  video={video}
-                  videos={videos}
-                  onSetVideos={setVideos}
-                />
+                <div className="video-wrapper h-full w-auto lg:my-4 snap-start snap-always relative flex gap-4 py-4">
+                  <div className="wrapper m-auto grid gap-1">
+                    <VideoComponent
+                      index={index}
+                      video={video}
+                      videoRefs={videoRefs}
+                      onSetMenuOpen={setMenuOpen}
+                    />
+                    {/*<div className="wrapper-button h-12">*/}
+                    {/*  <Button*/}
+                    {/*    type="button"*/}
+                    {/*    variant="primary"*/}
+                    {/*    className="w-full my-1"*/}
+                    {/*  >*/}
+                    {/*    Registrarse*/}
+                    {/*  </Button>*/}
+                    {/*</div>*/}
+                  </div>
+                  <VideoActions
+                    index={index}
+                    currentVideoIndex={currentVideoIndex}
+                    video={video}
+                    videos={videos}
+                    onSetVideos={setVideos}
+                  />
+                </div>
               </div>
             );
           })}
