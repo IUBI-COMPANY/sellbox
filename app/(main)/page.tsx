@@ -60,20 +60,14 @@ export default function FeedPage() {
           {/* Video Snapping List */}
           {videos.map((video, index) => {
             const isActive = index === currentVideoIndex;
-
             return (
               <div
                 key={video.id}
                 className="components-wrapper h-full w-full flex justify-center items-center snap-start snap-always relative"
               >
-                <div className="video-wrapper lg:my-4 py-4 w-full max-w-[60vw] h-full max-h-[calc(100vh-1rem)] flex justify-center items-end gap-4">
-                  <div className="wrapper m-auto h-full w-auto flex flex-col justify-center gap-1">
-                    <VideoComponent
-                      index={index}
-                      video={video}
-                      videoRefs={videoRefs}
-                      onSetMenuOpen={setMenuOpen}
-                    />
+                <div className="video-wrapper relative lg:my-4 py-4 w-auto h-auto max-h-[calc(100vh-1rem)] flex justify-center items-end gap-4">
+                  <div className="wrapper relative m-auto flex flex-col justify-center gap-1">
+                    <VideoComponent video={video} onSetMenuOpen={setMenuOpen} />
                     {/*<section className="wrapper-button">*/}
                     {/*  <Button*/}
                     {/*    type="button"*/}
