@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Search } from "lucide-react";
-import { Video } from "@/app/(main)/page";
+import MuxPlayer from "@mux/mux-player-react";
+import { Video } from "@/app/data-list/InitialVideos";
 
 interface Props {
   index: number;
@@ -28,7 +29,7 @@ export default function VideoComponent({
   };
 
   return (
-    <section className="items-wrapper relative w-full min-w-[27vw]  h-auto min-h-[calc(100vh-5rem)] bg-linear-to-b bg-black from-black/60 to-transparent lg:rounded-3xl lg:border lg:border-border/40 overflow-hidden">
+    <section className="items-wrapper w-auto h-full relative bg-linear-to-b bg-black from-black/60 to-transparent lg:rounded-3xl lg:border lg:border-border/40 overflow-hidden">
       {/* Transparent Header */}
       <header className="absolute w-full top-0 left-0 right-0 z-30 flex items-center justify-between px-4 py-4">
         <button
@@ -50,15 +51,14 @@ export default function VideoComponent({
         </button>
       </header>
       {/* HTML5 Video element */}
-      <video
-        ref={(el) => {
-          videoRefs.current[index] = el;
-        }}
-        src={video.video_url}
+      <MuxPlayer
+        playbackId={video.video_url}
+        streamType="on-demand"
+        autoPlay="muted"
         loop
         playsInline
-        onClick={() => handleVideoClick(index)}
-        className="h-full w-full object-cover cursor-pointer"
+        primaryColor="#f25c05" // Tu naranja de marca para la barra de carga si se muestra
+        className="h-full w-auto object-cover cursor-pointer"
       />
       {/* Bottom Overlay (Info details & WhatsApp CTA) */}
       <div className="absolute w-full left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-linear-to-t from-black/80 via-black/40 to-transparent text-white">
