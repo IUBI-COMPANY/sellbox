@@ -8,25 +8,9 @@ interface Props {
   onSetMenuOpen: (open: boolean) => void;
 }
 
-/**
- * VideoMobileComponent
- *
- * Full-screen mobile video card. Designed exclusively for mobile viewports.
- *
- * Layout:
- *  - The section fills the entire parent slide (w-full h-full = 100vw × 100dvh).
- *  - MuxPlayer uses `object-fit: contain` so ANY video ratio (vertical or
- *    horizontal) is always shown in full — no cropping.
- *    The black background of the section fills the letterbox/pillarbox areas.
- *  - Header (menu + tabs + search) and bottom info panel are absolutely
- *    overlaid on top of the video, just like TikTok mobile.
- *  - VideoActions are rendered separately in page.tsx as an absolute overlay
- *    on the right edge of this section.
- */
 export default function VideoMobileComponent({ video, onSetMenuOpen }: Props) {
   return (
     <section className="relative w-full h-full overflow-hidden bg-black">
-      {/* ── MUX Player — fills the section, contain preserves full frame ── */}
       <MuxPlayer
         playbackId={video.video_url}
         streamType="on-demand"
@@ -46,7 +30,6 @@ export default function VideoMobileComponent({ video, onSetMenuOpen }: Props) {
         }
       />
 
-      {/* ── Header overlay: menu, tabs, search ──────────────────────────── */}
       <header className="absolute w-full top-0 left-0 right-0 z-30 flex items-center justify-between px-4 py-4 bg-gradient-to-b from-black/60 to-transparent pointer-events-none">
         <button
           onClick={() => onSetMenuOpen(true)}
@@ -69,17 +52,14 @@ export default function VideoMobileComponent({ video, onSetMenuOpen }: Props) {
         </button>
       </header>
 
-      {/* ── Bottom gradient + info + WhatsApp CTA ───────────────────────── */}
       <div className="absolute w-full left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-gradient-to-t from-black/85 via-black/30 to-transparent text-white">
         <div className="space-y-2 w-full">
-          {/* Creator handle */}
           <div className="flex items-center gap-2">
             <h3 className="font-bold text-base hover:underline cursor-pointer">
               @{video.creator.username}
             </h3>
           </div>
 
-          {/* Title + "Más videos" pill */}
           <div className="flex items-center gap-2 flex-wrap">
             <h1 className="font-extrabold text-lg tracking-tight">
               {video.title}
@@ -89,12 +69,10 @@ export default function VideoMobileComponent({ video, onSetMenuOpen }: Props) {
             </button>
           </div>
 
-          {/* Description */}
           <p className="text-sm text-neutral-200 line-clamp-2 leading-relaxed mb-4">
             {video.description}
           </p>
 
-          {/* WhatsApp purchase CTA */}
           <a
             href={video.product.whatsapp_link}
             target="_blank"

@@ -39,50 +39,18 @@ export default function FeedPage() {
 
   return (
     <>
-      {/*
-       * OUTER SHELL — fills exactly the content area to the right of the Sidebar.
-       *
-       * h-full w-full → inherits from the `relative h-full w-full` parent div
-       * set by MainLayoutWrapper for the home page. That parent is inside
-       * <main class="lg:pl-16 xl:pl-60 h-screen overflow-hidden">, so this
-       * div naturally sits to the RIGHT of the Sidebar without any z-index
-       * conflicts or fixed-position hacks.
-       *
-       * bg-black on mobile (true fullscreen) / bg-background on desktop
-       * (shows the theme color in the area around the video card).
-       */}
       <div className="h-full w-full bg-black lg:bg-background">
-
-        {/*
-         * SCROLL CONTAINER
-         * h-full fills the outer shell; overflow-y-scroll + snap creates the
-         * swipe-feed. On desktop the centering is done per slide.
-         */}
         <div
           ref={containerRef}
           className="h-full w-full overflow-y-scroll snap-y snap-mandatory scrollbar-none"
         >
           {videos.map((video, index) => (
-            /*
-             * SLIDE
-             * h-full = same height as the scroll container = same as the
-             * outer shell = the content area height (100vh on desktop,
-             * 100dvh on mobile).
-             *
-             * `relative` lets the mobile VideoActions overlay work.
-             * On desktop: flex + items-center + justify-center centers the
-             * card+actions row in the content area.
-             */
             <div
               key={video.id}
               data-index={index}
               className="relative h-full w-full snap-start snap-always lg:flex lg:items-center lg:justify-center"
             >
-
-              {/* ── MOBILE (hidden lg+) ──────────────────────────────────
-                  Full-screen video with VideoActions as an absolute overlay
-                  on the right edge, same as TikTok mobile.
-              ─────────────────────────────────────────────────────────── */}
+              {/* ── MOBILE (hidden lg+) ─────────*/}
               <div className="lg:hidden w-full h-full">
                 <VideoMobileComponent
                   video={video}
@@ -100,11 +68,7 @@ export default function FeedPage() {
                 />
               </div>
 
-              {/* ── DESKTOP (hidden below lg) ────────────────────────────
-                  VideoDesktopComponent card + VideoActions side-by-side.
-                  items-end aligns actions to the card's bottom edge for
-                  any card ratio (portrait or landscape).
-              ─────────────────────────────────────────────────────────── */}
+              {/* ── DESKTOP (hidden below lg) ──────*/}
               <div className="hidden lg:flex lg:items-end lg:gap-4 lg:py-4">
                 <VideoDesktopComponent video={video} />
 
@@ -118,7 +82,6 @@ export default function FeedPage() {
                   />
                 </div>
               </div>
-
             </div>
           ))}
         </div>
