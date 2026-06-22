@@ -3,6 +3,12 @@ export interface Video {
   title: string;
   description: string;
   video_url: string;
+  /**
+   * CSS aspect-ratio value for the video (e.g. "9/16", "16/9", "1/1").
+   * Used on desktop to size the card correctly for any orientation.
+   * Defaults to "9/16" (portrait) if omitted.
+   */
+  aspect_ratio?: string;
   creator: {
     username: string;
     display_name: string;

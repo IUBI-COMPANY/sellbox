@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
 import Link from "next/link";
-import { Video } from "@/app/(main)/page";
+import { Video } from "@/app/data-list/InitialVideos";
 
 interface Comment {
   id: string;

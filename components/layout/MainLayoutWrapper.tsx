@@ -38,7 +38,7 @@ export default function MainLayoutWrapper({
             : 'pt-16 pb-20 md:pb-4 lg:pl-16 xl:pl-60'}
         `.trim()}
       >
-        <div className={isHome ? 'h-full w-full bg-background' : 'min-h-[calc(100vh-4rem)]'}>
+        <div className={isHome ? 'relative h-full w-full bg-background' : 'min-h-[calc(100vh-4rem)]'}>
           {children}
         </div>
       </main>
