@@ -6,11 +6,11 @@ import VideoActions from "@/components/ui/video-components/VideoActions";
 import VideoMobileComponent from "@/components/ui/video-components/VideoMobileComponent";
 import VideoDesktopComponent from "@/components/ui/video-components/VideoDesktopComponent";
 import MobileDrawer from "@/components/layout/MobileDrawer";
-import { INITIAL_VIDEOS, Video } from "@/app/data-list/InitialVideos";
+import { MOCK_VIDEOS, Video } from "@/app/data-list/MockVideos";
 
 export default function FeedPage() {
   const { theme, setTheme } = useTheme();
-  const [videos, setVideos] = useState<Video[]>(INITIAL_VIDEOS);
+  const [videos, setVideos] = useState<Video[]>(MOCK_VIDEOS);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -69,10 +69,10 @@ export default function FeedPage() {
               </div>
 
               {/* ── DESKTOP (hidden below lg) ──────*/}
-              <div className="hidden lg:flex lg:items-end lg:gap-4 lg:py-4">
+              <div className="hidden lg:flex lg:items-center lg:gap-4 lg:py-4 lg:items-end">
                 <VideoDesktopComponent video={video} />
 
-                <div className="flex-shrink-0 pb-5">
+                <div className="flex-shrink-0">
                   <VideoActions
                     index={index}
                     currentVideoIndex={currentVideoIndex}

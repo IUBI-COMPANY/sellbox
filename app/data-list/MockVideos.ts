@@ -28,7 +28,7 @@ export interface Video {
   };
 }
 
-export const INITIAL_VIDEOS: Video[] = [
+export const MOCK_VIDEOS: Video[] = [
   {
     id: "1",
     title: "AnyCast M12 PLUS",

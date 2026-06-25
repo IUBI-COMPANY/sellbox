@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, Search } from "lucide-react";
 import MuxPlayer from "@mux/mux-player-react";
-import { Video } from "@/app/data-list/InitialVideos";
+import { Video } from "@/app/data-list/MockVideos";
 
 interface Props {
   video: Video;
@@ -52,7 +52,7 @@ export default function VideoMobileComponent({ video, onSetMenuOpen }: Props) {
         </button>
       </header>
 
-      <div className="absolute w-full left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-gradient-to-t from-black/85 via-black/30 to-transparent text-white">
+      <div className="absolute w-full max-w-[80%] left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-gradient-to-t from-black/85 via-black/30 to-transparent text-white">
         <div className="space-y-2 w-full">
           <div className="flex items-center gap-2">
             <h3 className="font-bold text-base hover:underline cursor-pointer">

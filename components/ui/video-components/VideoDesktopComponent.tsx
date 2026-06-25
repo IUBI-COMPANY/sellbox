@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import MuxPlayer from "@mux/mux-player-react";
-import { Video } from "@/app/data-list/InitialVideos";
+import { Video } from "@/app/data-list/MockVideos";
 
 interface Props {
   video: Video;
@@ -50,7 +50,7 @@ export default function VideoDesktopComponent({ video }: Props) {
       />
 
       <div className="absolute w-full left-0 right-0 bottom-0 z-10 px-5 pb-6 pt-24 bg-gradient-to-t from-black/85 via-black/30 to-transparent text-white">
-        <div className="space-y-2 w-full">
+        <div className="space-y-2 w-full max-w-md">
           <div className="flex items-center gap-2">
             <h3 className="font-bold text-base hover:underline cursor-pointer">
               @{video.creator.username}
