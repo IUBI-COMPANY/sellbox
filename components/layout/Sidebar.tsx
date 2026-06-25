@@ -53,13 +53,12 @@ export default function Sidebar() {
         {/* Logo */}
         <div className="h-16 flex items-center justify-center xl:justify-start xl:px-5">
           <div className="xl:hidden">
-            <Logo size="sm" className="[&>span]:hidden" />
+            <Logo size="sm" iconOnly className="[&>span]:hidden" />
           </div>
           <div className="hidden xl:block">
-            <Logo size="lg" />
+            <Logo size="md" />
           </div>
         </div>
-
         {/* Navigation */}
         <nav className="flex-1 py-4 px-2 xl:px-3 space-y-1">
           {/* Center: Search bar — desktop only */}

@@ -1,52 +1,69 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
+import logotipoInlineLight from "@/app/assets/brand/logotipo-inline-light.png";
+import logotipoInlineDark from "@/app/assets/brand/logotipo-inline-dark.png";
+import logotipoVerticalLight from "@/app/assets/brand/logotipo-vertical-light.png";
+import logotipoVerticalDark from "@/app/assets/brand/logotipo-vertical-dark.png";
+import isotipoLight from "@/app/assets/brand/isotipo-light.png";
+import isotipoDark from "@/app/assets/brand/isotipo-dark.png";
+
 type LogoSize = "sm" | "md" | "lg";
+type LogoVariant = "inline" | "vertical";
 
 interface LogoProps {
   size?: LogoSize;
+  variant?: LogoVariant;
+  iconOnly?: boolean;
   className?: string;
 }
 
-const sizeStyles: Record<LogoSize, { text: string; icon: string }> = {
-  sm: { text: "text-lg", icon: "w-5 h-5" },
-  md: { text: "text-xl", icon: "w-6 h-6" },
-  lg: { text: "text-3xl", icon: "w-8 h-8" },
+const imageStyles: Record<LogoSize, { inline: string; vertical: string; icon: string }> = {
+  sm: { inline: "h-6 w-auto", vertical: "h-12 w-auto", icon: "w-6 h-6" },
+  md: { inline: "h-8 w-auto", vertical: "h-16 w-auto", icon: "w-8 h-8" },
+  lg: { inline: "h-10 w-auto", vertical: "h-20 w-auto", icon: "w-10 h-10" },
 };
 
-export default function Logo({ size = "md", className = "" }: LogoProps) {
-  const theme = useTheme();
-  const styles = sizeStyles[size];
-  const { resolvedTheme = null } = theme;
+export default function Logo({
+  size = "md",
+  variant = "inline",
+  iconOnly = false,
+  className = "",
+}: LogoProps) {
+  const { resolvedTheme = "dark" } = useTheme();
+  const isIconOnly = iconOnly || className.includes("[&>span]:hidden");
+  const styles = imageStyles[size];
+
+  // Select the correct image based on variant, iconOnly, and theme
+  let src;
+  let alt = "SellBox";
+  let imgClass = "";
+
+  if (isIconOnly) {
+    src = resolvedTheme === "light" ? isotipoDark : isotipoLight;
+    alt = "SellBox Isotipo";
+    imgClass = styles.icon;
+  } else if (variant === "vertical") {
+    src = resolvedTheme === "light" ? logotipoVerticalDark : logotipoVerticalLight;
+    alt = "SellBox Logo Vertical";
+    imgClass = styles.vertical;
+  } else {
+    src = resolvedTheme === "light" ? logotipoInlineDark : logotipoInlineLight;
+    alt = "SellBox Logo";
+    imgClass = styles.inline;
+  }
 
   return (
-    <Link href="/" className={`flex items-center gap-2 group ${className}`}>
-      {/* Icon: Play button with shopping bag concept */}
-      <div
-        className={`
-          ${styles.icon} rounded-lg flex items-center justify-center
-          transition-transform duration-200 group-hover:scale-110
-        `}
-        style={{ background: "var(--gradient-brand)" }}
-      >
-        {/* Play triangle */}
-        <svg viewBox="0 0 24 24" fill="none" className="w-[60%] h-[60%]">
-          <path
-            d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"
-            fill="white"
-          />
-        </svg>
-      </div>
-
-      {/* Text */}
-      <span className={`${styles.text} font-bold tracking-tight`}>
-        <span className="text-gradient">Sell</span>
-        <span
-          className={resolvedTheme === "dark" ? "text-white" : "text-black"}
-        >
-          Box
-        </span>
-      </span>
+    <Link href="/" className={`flex items-center group ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        priority
+        className={`${imgClass} object-contain transition-transform duration-200 group-hover:scale-105`}
+      />
     </Link>
   );
 }
