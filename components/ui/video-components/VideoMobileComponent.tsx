@@ -52,27 +52,26 @@ export default function VideoMobileComponent({ video, onSetMenuOpen }: Props) {
         </button>
       </header>
 
-      <div className="absolute w-full max-w-[80%] left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-gradient-to-t from-black/85 via-black/30 to-transparent text-white">
+      <div className="absolute w-full left-0 right-0 bottom-0 z-10 px-4 pb-5 pt-20 bg-gradient-to-t from-black/85 via-black/30 to-transparent text-white">
         <div className="space-y-2 w-full">
-          <div className="flex items-center gap-2">
-            <h3 className="font-bold text-base hover:underline cursor-pointer">
-              @{video.creator.username}
-            </h3>
+          <div className="txt-items w-full max-w-[calc(100vw-6rem)]">
+            <div className="flex items-center gap-2">
+              <h3 className="font-bold text-base hover:underline cursor-pointer">
+                @{video.creator.username}
+              </h3>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="font-extrabold text-lg tracking-tight">
+                {video.title}
+              </h1>
+              <button className="px-2 py-0.5 text-[10px] font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/10 rounded-full transition-colors">
+                Más videos
+              </button>
+            </div>
+            <p className="text-sm text-neutral-200 line-clamp-2 leading-relaxed mb-4">
+              {video.description}
+            </p>
           </div>
-
-          <div className="flex items-center gap-2 flex-wrap">
-            <h1 className="font-extrabold text-lg tracking-tight">
-              {video.title}
-            </h1>
-            <button className="px-2 py-0.5 text-[10px] font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/10 rounded-full transition-colors">
-              Más videos
-            </button>
-          </div>
-
-          <p className="text-sm text-neutral-200 line-clamp-2 leading-relaxed mb-4">
-            {video.description}
-          </p>
-
           <a
             href={video.product.whatsapp_link}
             target="_blank"

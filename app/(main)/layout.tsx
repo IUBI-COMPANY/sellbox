@@ -1,9 +1,7 @@
-import { cookies } from 'next/headers';
-import { createClient } from '@/lib/supabase/server';
-import Navbar from '@/components/layout/Navbar';
-import BottomTabs from '@/components/layout/BottomTabs';
-import Sidebar from '@/components/layout/Sidebar';
-import MainLayoutWrapper from '@/components/layout/MainLayoutWrapper';
+import { createClient } from "@/lib/supabase/server";
+import BottomTabs from "@/components/layout/BottomTabs";
+import Sidebar from "@/components/layout/Sidebar";
+import MainLayoutWrapper from "@/components/layout/MainLayoutWrapper";
 
 export default async function MainLayout({
   children,
@@ -33,10 +31,7 @@ export default async function MainLayout({
     : null;
 
   return (
-    <MainLayoutWrapper
-      sidebar={<Sidebar />}
-      bottomTabs={<BottomTabs />}
-    >
+    <MainLayoutWrapper sidebar={<Sidebar />} bottomTabs={<BottomTabs />}>
       {children}
     </MainLayoutWrapper>
   );

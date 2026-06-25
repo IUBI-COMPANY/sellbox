@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { usePathname } from 'next/navigation';
+import React from "react";
+import { usePathname } from "next/navigation";
 
 interface MainLayoutWrapperProps {
   children: React.ReactNode;
@@ -17,15 +17,15 @@ export default function MainLayoutWrapper({
   bottomTabs,
 }: MainLayoutWrapperProps) {
   const pathname = usePathname();
-  const isHome = pathname === '/';
+  const isHome = pathname === "/";
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Render Navbar: on home page, it is desktop-only; otherwise, it is always visible */}
-        {navbar && <div className={isHome ? 'hidden lg:block' : 'block'}>
-            {navbar}
-        </div>}
-      
+      {navbar && (
+        <div className={isHome ? "hidden lg:block" : "block"}>{navbar}</div>
+      )}
+
       {/* Sidebar (desktop only, handled in Sidebar component) */}
       {sidebar}
 
@@ -33,12 +33,20 @@ export default function MainLayoutWrapper({
       <main
         className={`
           transition-all duration-300
-          ${isHome 
-            ? 'h-screen w-full lg:pl-16 xl:pl-60 relative overflow-hidden' 
-            : 'pt-16 pb-20 md:pb-4 lg:pl-16 xl:pl-60'}
+          ${
+            isHome
+              ? "h-screen w-full lg:pl-16 xl:pl-60 relative overflow-hidden"
+              : "pt-16 pb-20 md:pb-4 lg:pl-16 xl:pl-60"
+          }
         `.trim()}
       >
-        <div className={isHome ? 'relative h-full w-full bg-background' : 'min-h-[calc(100vh-4rem)]'}>
+        <div
+          className={
+            isHome
+              ? "relative h-full w-full bg-background"
+              : "min-h-[calc(100vh-4rem)]"
+          }
+        >
           {children}
         </div>
       </main>
