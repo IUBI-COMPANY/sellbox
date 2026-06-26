@@ -22,11 +22,11 @@ export default function VideoDesktopComponent({ video }: Props) {
 
   return (
     <section
-      className="relative overflow-hidden bg-black rounded-3xl border border-border/30 shadow-2xl flex-none"
+      className="relative overflow-hidden bg-black rounded-3xl border border-border/30 shadow-2xl flex-none m-auto"
       style={{
-        height: "min(844px, calc(100dvh - 5rem))",
         aspectRatio,
-        maxWidth: "min(80vw, 1000px)",
+        height: "min(97vh, 97vw)",
+        maxWidth: "min(60vw, 70vw)",
       }}
     >
       <MuxPlayer
@@ -43,7 +43,7 @@ export default function VideoDesktopComponent({ video }: Props) {
             inset: 0,
             width: "100%",
             height: "100%",
-            "--media-object-fit": "cover",
+            "--media-object-fit": "contain",
             "--media-object-position": "center",
           } as any
         }

@@ -35,8 +35,8 @@ export default function MainLayoutWrapper({
           transition-all duration-300
           ${
             isHome
-              ? "h-screen w-full lg:pl-16 xl:pl-60 relative overflow-hidden"
-              : "pt-16 pb-20 md:pb-4 lg:pl-16 xl:pl-60"
+              ? "h-screen w-full relative overflow-hidden"
+              : "pt-16 pb-20 md:pb-4"
           }
         `.trim()}
       >

@@ -48,30 +48,32 @@ export default function Sidebar() {
   const { resolvedTheme = null } = theme;
 
   return (
-    <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 flex-col w-16 xl:w-60 transition-all duration-300 overflow-auto">
-      <div className="scroll-container min-h-screen flex flex-col justify-between w-full border-r border-border/50 bg-background/80 backdrop-blur-md">
-        {/* Logo */}
-        <div className="h-16 flex items-center justify-center xl:justify-start xl:px-5">
-          <div className="xl:hidden">
-            <Logo size="sm" iconOnly className="[&>span]:hidden" />
+    <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 flex-col w-16 xl:w-60 transition-all duration-300 overflow-y-auto overflow-x-hidden scrollbar-none">
+      <div className="relative scroll-container min-h-screen flex flex-col justify-between w-full bg-transparent">
+        <div className="top-items w-full h-auto px-2 sticky top-0 bg-background">
+          {/* Logo */}
+          <div className="h-16 flex items-center justify-center xl:justify-start xl:px-5">
+            <div className="xl:hidden">
+              <Logo size="sm" iconOnly className="[&>span]:hidden" />
+            </div>
+            <div className="hidden xl:block">
+              <Logo size="lg" />
+            </div>
           </div>
-          <div className="hidden xl:block">
-            <Logo size="md" />
-          </div>
-        </div>
-        {/* Navigation */}
-        <nav className="flex-1 py-4 px-2 xl:px-3 space-y-1">
-          {/* Center: Search bar — desktop only */}
-          <div className="hidden md:flex flex-1 max-w-md mx-auto mb-5">
+          {/* Center: Search bar — desktop only (only visible when sidebar is expanded) */}
+          <div className="hidden xl:flex flex-1 max-w-md mx-auto">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
               <input
                 type="text"
                 placeholder="Buscar productos, videos, creadores..."
-                className={`"w-full bg-gray-400/30 ${resolvedTheme === "dark" ? "hover:bg-gray-400/40" : "hover:bg-gray-700/20"} rounded-full pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 hover:-hover"`}
+                className={`w-full bg-gray-400/30 ${resolvedTheme === "dark" ? "hover:bg-gray-400/40" : "hover:bg-gray-700/20"} rounded-full pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50`}
               />
             </div>
           </div>
+        </div>
+        {/* Navigation */}
+        <nav className="flex-1 py-4 px-2 xl:px-3 space-y-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
 

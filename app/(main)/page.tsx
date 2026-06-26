@@ -39,7 +39,7 @@ export default function FeedPage() {
 
   return (
     <>
-      <div className="h-full w-full bg-black lg:bg-background grid grid-rows-[1fr_4rem]">
+      <div className="h-full w-full bg-black lg:bg-background">
         <div
           ref={containerRef}
           className="h-full w-full overflow-y-scroll snap-y snap-mandatory scrollbar-none"
