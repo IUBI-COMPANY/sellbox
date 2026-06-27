@@ -1,23 +1,24 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { createClient } from '@/lib/supabase/client';
-import { Mail, Lock, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
-import Input from '@/components/ui/Input';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { createClient } from "@/lib/supabase/client";
+import { Mail, Lock, Eye, EyeOff, Loader2, AlertCircle } from "lucide-react";
+import Input from "@/components/ui/Input";
+import Logo from "@/components/ui/Logo";
 
 const loginSchema = z.object({
   email: z
     .string()
-    .min(1, { message: 'El correo electrónico es obligatorio' })
-    .email({ message: 'Ingresa un correo electrónico válido' }),
+    .min(1, { message: "El correo electrónico es obligatorio" })
+    .email({ message: "Ingresa un correo electrónico válido" }),
   password: z
     .string()
-    .min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
+    .min(6, { message: "La contraseña debe tener al menos 6 caracteres" }),
 });
 
 type LoginFields = z.infer<typeof loginSchema>;
@@ -35,8 +36,8 @@ export default function LoginPage() {
   } = useForm<LoginFields>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -52,32 +53,30 @@ export default function LoginPage() {
 
     if (authError) {
       setServerError(
-        authError.message === 'Invalid login credentials'
-          ? 'Correo o contraseña incorrectos'
-          : 'Ocurrió un error al iniciar sesión. Intenta de nuevo.'
+        authError.message === "Invalid login credentials"
+          ? "Correo o contraseña incorrectos"
+          : "Ocurrió un error al iniciar sesión. Intenta de nuevo.",
       );
       setLoading(false);
       return;
     }
 
-    router.push('/');
+    router.push("/");
     router.refresh();
   }
 
   return (
     <div className="space-y-8">
       {/* Logo */}
-      <div className="text-center">
-        <h1 className="text-gradient text-4xl font-bold tracking-tight">
-          Sellbox
-        </h1>
-        <p className="mt-2 text-sm text-neutral-400">
-          Tu marketplace de video commerce
+      <div className="flex flex-col items-center text-center">
+        <Logo size="lg" className="justify-center" />
+        <p className="mt-3 text-sm text-neutral-300">
+          Si no ves, cómo funciona no lo compres
         </p>
       </div>
 
-      {/* Card */}
-      <div className="rounded-2xl border border-border bg-card p-8 shadow-2xl shadow-brand/5 backdrop-blur-xl">
+      {/* Form Container */}
+      <div className="w-full py-2">
         <h2 className="mb-6 text-xl font-semibold text-foreground">
           Iniciar Sesión
         </h2>
@@ -100,13 +99,13 @@ export default function LoginPage() {
             icon={<Mail className="h-4 w-4" />}
             error={errors.email?.message}
             disabled={loading}
-            {...register('email')}
+            {...register("email")}
           />
 
           {/* Password */}
           <Input
             label="Contraseña"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             placeholder="••••••••"
             autoComplete="current-password"
             icon={<Lock className="h-4 w-4" />}
@@ -118,7 +117,7 @@ export default function LoginPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="text-neutral-500 transition-colors hover:text-neutral-300"
                 aria-label={
-                  showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'
+                  showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
                 }
               >
                 {showPassword ? (
@@ -128,7 +127,7 @@ export default function LoginPage() {
                 )}
               </button>
             }
-            {...register('password')}
+            {...register("password")}
           />
 
           {/* Submit */}
@@ -143,7 +142,7 @@ export default function LoginPage() {
                 Iniciando sesión...
               </span>
             ) : (
-              'Iniciar Sesión'
+              "Iniciar Sesión"
             )}
           </button>
         </form>
@@ -157,7 +156,7 @@ export default function LoginPage() {
 
         {/* Register link */}
         <p className="text-center text-sm text-muted-foreground">
-          ¿No tienes cuenta?{' '}
+          ¿No tienes cuenta?{" "}
           <Link
             href="/register"
             className="font-medium text-brand transition-colors hover:text-brand-hover"

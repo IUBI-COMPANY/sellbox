@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { createClient } from '@/lib/supabase/client';
+import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { createClient } from "@/lib/supabase/client";
 import {
   Mail,
   Lock,
@@ -16,50 +16,33 @@ import {
   AlertCircle,
   User,
   AtSign,
-} from 'lucide-react';
-import Input from '@/components/ui/Input';
+} from "lucide-react";
+import Input from "@/components/ui/Input";
+import Logo from "@/components/ui/Logo";
+import { getPasswordStrength } from "@/utils/getPasswordStrength";
 
 const registerSchema = z.object({
   full_name: z
     .string()
-    .min(2, 'El nombre debe tener al menos 2 caracteres')
-    .max(100, 'El nombre es demasiado largo'),
+    .min(2, "El nombre debe tener al menos 2 caracteres")
+    .max(100, "El nombre es demasiado largo"),
   username: z
     .string()
-    .min(3, 'El usuario debe tener al menos 3 caracteres')
-    .max(30, 'El usuario es demasiado largo')
-    .regex(
-      /^[a-zA-Z0-9_]+$/,
-      'Solo letras, números y guion bajo'
-    ),
-  email: z.string().min(1, 'El correo electrónico es requerido').email('Ingresa un correo válido'),
+    .min(3, "El usuario debe tener al menos 3 caracteres")
+    .max(30, "El usuario es demasiado largo")
+    .regex(/^[a-zA-Z0-9_]+$/, "Solo letras, números y guion bajo"),
+  email: z
+    .string()
+    .min(1, "El correo electrónico es requerido")
+    .email("Ingresa un correo válido"),
   password: z
     .string()
-    .min(8, 'Mínimo 8 caracteres')
-    .regex(/[a-zA-Z]/, 'Debe contener al menos una letra')
-    .regex(/[0-9]/, 'Debe contener al menos un número'),
+    .min(8, "Mínimo 8 caracteres")
+    .regex(/[a-zA-Z]/, "Debe contener al menos una letra")
+    .regex(/[0-9]/, "Debe contener al menos un número"),
 });
 
 type RegisterFields = z.infer<typeof registerSchema>;
-
-function getPasswordStrength(password: string): {
-  score: number;
-  label: string;
-  color: string;
-} {
-  let score = 0;
-  if (password.length >= 8) score++;
-  if (password.length >= 12) score++;
-  if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
-  if (/[0-9]/.test(password)) score++;
-  if (/[^a-zA-Z0-9]/.test(password)) score++;
-
-  if (score <= 1) return { score: 1, label: 'Débil', color: 'bg-red-500' };
-  if (score <= 2) return { score: 2, label: 'Regular', color: 'bg-orange-500' };
-  if (score <= 3) return { score: 3, label: 'Buena', color: 'bg-yellow-500' };
-  if (score <= 4) return { score: 4, label: 'Fuerte', color: 'bg-green-500' };
-  return { score: 5, label: 'Muy fuerte', color: 'bg-emerald-400' };
-}
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -76,18 +59,18 @@ export default function RegisterPage() {
   } = useForm<RegisterFields>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      full_name: '',
-      username: '',
-      email: '',
-      password: '',
+      full_name: "",
+      username: "",
+      email: "",
+      password: "",
     },
   });
 
-  const passwordVal = watch('password');
+  const passwordVal = watch("password");
 
   const passwordStrength = useMemo(
     () => (passwordVal ? getPasswordStrength(passwordVal) : null),
-    [passwordVal]
+    [passwordVal],
   );
 
   async function onSubmit(data: RegisterFields) {
@@ -102,40 +85,44 @@ export default function RegisterPage() {
         data: {
           full_name: data.full_name,
           username: data.username,
-          role: 'buyer',
+          role: "buyer",
         },
       },
     });
 
     if (authError) {
-      if (authError.message.includes('already registered')) {
-        setServerError('Este correo ya está registrado. Intenta iniciar sesión.');
+      if (authError.message.includes("already registered")) {
+        setServerError(
+          "Este correo ya está registrado. Intenta iniciar sesión.",
+        );
       } else {
-        setServerError('Ocurrió un error al crear la cuenta. Intenta de nuevo.');
+        setServerError(
+          "Ocurrió un error al crear la cuenta. Intenta de nuevo.",
+        );
       }
       setLoading(false);
       return;
     }
 
-    router.push('/');
+    router.push("/");
     router.refresh();
   }
 
   return (
     <div className="space-y-8">
       {/* Logo */}
-      <div className="text-center">
-        <h1 className="text-gradient text-4xl font-bold tracking-tight">
-          Sellbox
-        </h1>
-        <p className="mt-2 text-sm text-neutral-400">
+      <div className="flex flex-col items-center text-center">
+        <Logo size="lg" className="justify-center" />
+        <p className="mt-3 text-sm text-neutral-400">
           Crea tu cuenta y empieza hoy
         </p>
       </div>
 
-      {/* Card */}
-      <div className="rounded-2xl border border-border bg-card p-8 shadow-2xl shadow-brand/5 backdrop-blur-xl">
-        <h2 className="mb-6 text-xl font-semibold text-foreground">Crear Cuenta</h2>
+      {/* Form Container */}
+      <div className="w-full py-2">
+        <h2 className="mb-6 text-xl font-semibold text-foreground">
+          Crear Cuenta
+        </h2>
 
         {/* Error banner */}
         {serverError && (
@@ -155,7 +142,7 @@ export default function RegisterPage() {
             icon={<User className="h-4 w-4" />}
             error={errors.full_name?.message}
             disabled={loading}
-            {...register('full_name')}
+            {...register("full_name")}
           />
 
           {/* Username */}
@@ -167,10 +154,12 @@ export default function RegisterPage() {
             icon={<AtSign className="h-4 w-4" />}
             error={errors.username?.message}
             disabled={loading}
-            {...register('username', {
+            {...register("username", {
               onChange: (e) => {
-                setValue('username', e.target.value.toLowerCase(), { shouldValidate: true });
-              }
+                setValue("username", e.target.value.toLowerCase(), {
+                  shouldValidate: true,
+                });
+              },
             })}
           />
 
@@ -183,14 +172,14 @@ export default function RegisterPage() {
             icon={<Mail className="h-4 w-4" />}
             error={errors.email?.message}
             disabled={loading}
-            {...register('email')}
+            {...register("email")}
           />
 
           {/* Password */}
           <div className="space-y-2">
             <Input
               label="Contraseña"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               autoComplete="new-password"
               icon={<Lock className="h-4 w-4" />}
@@ -202,7 +191,7 @@ export default function RegisterPage() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="text-neutral-500 transition-colors hover:text-neutral-300"
                   aria-label={
-                    showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'
+                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
                   }
                 >
                   {showPassword ? (
@@ -212,7 +201,7 @@ export default function RegisterPage() {
                   )}
                 </button>
               }
-              {...register('password')}
+              {...register("password")}
             />
 
             {/* Strength indicator */}
@@ -225,13 +214,13 @@ export default function RegisterPage() {
                       className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
                         level <= passwordStrength.score
                           ? passwordStrength.color
-                          : 'bg-white/[0.06]'
+                          : "bg-white/[0.06]"
                       }`}
                     />
                   ))}
                 </div>
                 <p className="text-xs text-neutral-500">
-                  Seguridad:{' '}
+                  Seguridad:{" "}
                   <span className="text-neutral-400">
                     {passwordStrength.label}
                   </span>
@@ -252,7 +241,7 @@ export default function RegisterPage() {
                 Creando cuenta...
               </span>
             ) : (
-              'Crear Cuenta'
+              "Crear Cuenta"
             )}
           </button>
         </form>
@@ -266,7 +255,7 @@ export default function RegisterPage() {
 
         {/* Login link */}
         <p className="text-center text-sm text-muted-foreground">
-          ¿Ya tienes cuenta?{' '}
+          ¿Ya tienes cuenta?{" "}
           <Link
             href="/login"
             className="font-medium text-brand transition-colors hover:text-brand-hover"
