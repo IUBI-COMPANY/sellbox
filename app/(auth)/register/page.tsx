@@ -113,7 +113,7 @@ export default function RegisterPage() {
       {/* Logo */}
       <div className="flex flex-col items-center text-center">
         <Logo size="lg" className="justify-center" />
-        <p className="mt-3 text-sm text-neutral-400">
+        <p className="mt-3 text-sm text-neutral-500 dark:text-neutral-400">
           Crea tu cuenta y empieza hoy
         </p>
       </div>
@@ -189,7 +189,7 @@ export default function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-neutral-500 transition-colors hover:text-neutral-300"
+                  className="text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-neutral-300"
                   aria-label={
                     showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
                   }

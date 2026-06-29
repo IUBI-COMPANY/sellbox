@@ -6,7 +6,7 @@ import VideoActions from "@/components/ui/video-components/VideoActions";
 import VideoMobileComponent from "@/components/ui/video-components/VideoMobileComponent";
 import VideoDesktopComponent from "@/components/ui/video-components/VideoDesktopComponent";
 import MobileDrawer from "@/components/layout/MobileDrawer";
-import { MOCK_VIDEOS, Video } from "@/app/data-list/MockVideos";
+import { MOCK_VIDEOS, Video } from "@/data-list/MockVideos";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 export default function FeedPage() {
@@ -172,4 +172,3 @@ export default function FeedPage() {
     </>
   );
 }
-

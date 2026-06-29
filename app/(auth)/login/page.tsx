@@ -41,7 +41,7 @@ export default function LoginPage() {
     },
   });
 
-  async function onSubmit(data: LoginFields) {
+  const onSubmit = async (data: LoginFields) => {
     setLoading(true);
     setServerError(null);
 
@@ -63,14 +63,14 @@ export default function LoginPage() {
 
     router.push("/");
     router.refresh();
-  }
+  };
 
   return (
     <div className="space-y-8">
       {/* Logo */}
       <div className="flex flex-col items-center text-center">
         <Logo size="lg" className="justify-center" />
-        <p className="mt-3 text-sm text-neutral-300">
+        <p className="mt-3 text-sm text-neutral-500 dark:text-neutral-400">
           Si no ves, cómo funciona no lo compres
         </p>
       </div>
@@ -115,7 +115,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-neutral-500 transition-colors hover:text-neutral-300"
+                className="text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-neutral-300"
                 aria-label={
                   showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
                 }
