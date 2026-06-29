@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import MuxPlayer from "@mux/mux-player-react";
-import { Video } from "@/app/data-list/MockVideos";
+import { Video } from "@/data-list/MockVideos";
 
 interface Props {
   video: Video;

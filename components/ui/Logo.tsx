@@ -4,12 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
-import logotipoInlineLight from "@/app/assets/brand/logotipo-inline-light.png";
-import logotipoInlineDark from "@/app/assets/brand/logotipo-inline-dark.png";
-import logotipoVerticalLight from "@/app/assets/brand/logotipo-vertical-light.png";
-import logotipoVerticalDark from "@/app/assets/brand/logotipo-vertical-dark.png";
-import isotipoLight from "@/app/assets/brand/isotipo-light.png";
-import isotipoDark from "@/app/assets/brand/isotipo-dark.png";
+import logotipoInlineLight from "@/assets/brand/logotipo-inline-light.png";
+import logotipoInlineDark from "@/assets/brand/logotipo-inline-dark.png";
+import logotipoVerticalLight from "@/assets/brand/logotipo-vertical-light.png";
+import logotipoVerticalDark from "@/assets/brand/logotipo-vertical-dark.png";
+import isotipoLight from "@/assets/brand/isotipo-light.png";
+import isotipoDark from "@/assets/brand/isotipo-dark.png";
 
 type LogoSize = "sm" | "md" | "lg";
 type LogoVariant = "inline" | "vertical";
@@ -21,7 +21,10 @@ interface LogoProps {
   className?: string;
 }
 
-const imageStyles: Record<LogoSize, { inline: string; vertical: string; icon: string }> = {
+const imageStyles: Record<
+  LogoSize,
+  { inline: string; vertical: string; icon: string }
+> = {
   sm: { inline: "h-6 w-auto", vertical: "h-12 w-auto", icon: "w-6 h-6" },
   md: { inline: "h-8 w-auto", vertical: "h-16 w-auto", icon: "w-8 h-8" },
   lg: { inline: "h-10 w-auto", vertical: "h-20 w-auto", icon: "w-10 h-10" },
@@ -47,7 +50,8 @@ export default function Logo({
     alt = "SellBox Isotipo";
     imgClass = styles.icon;
   } else if (variant === "vertical") {
-    src = resolvedTheme === "light" ? logotipoVerticalDark : logotipoVerticalLight;
+    src =
+      resolvedTheme === "light" ? logotipoVerticalDark : logotipoVerticalLight;
     alt = "SellBox Logo Vertical";
     imgClass = styles.vertical;
   } else {

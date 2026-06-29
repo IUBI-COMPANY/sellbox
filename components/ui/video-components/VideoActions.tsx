@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
 import Link from "next/link";
-import { Video } from "@/app/data-list/MockVideos";
-import { MOCK_COMMENTS, Comment } from "@/app/data-list/MockComments";
+import { Video } from "@/data-list/MockVideos";
+import { MOCK_COMMENTS, Comment } from "@/data-list/MockComments";
 
 interface Props {
   index: number;
