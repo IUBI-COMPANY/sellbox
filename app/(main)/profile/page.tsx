@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-import { LogOut, User as UserIcon } from 'lucide-react';
-import Avatar from '@/components/ui/Avatar';
-import Button from '@/components/ui/Button';
-import type { User } from '@supabase/supabase-js';
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { LogOut, User as UserIcon } from "lucide-react";
+import Avatar from "@/components/ui/Avatar";
+import Button from "@/components/ui/Button";
+import type { User } from "@supabase/supabase-js";
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -33,7 +33,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     setLoggingOut(true);
     await supabase.auth.signOut();
-    window.location.href = '/login';
+    window.location.href = "/login";
   };
 
   if (loading) {
@@ -78,18 +78,14 @@ export default function ProfilePage() {
 
   // Logged in
   const displayName =
-    user.user_metadata?.full_name || user.email?.split('@')[0] || 'Usuario';
+    user.user_metadata?.full_name || user.email?.split("@")[0] || "Usuario";
   const avatarUrl = user.user_metadata?.avatar_url as string | undefined;
 
   return (
     <div className="max-w-lg mx-auto px-4 py-8 animate-fade-in">
       {/* Profile header */}
       <div className="flex flex-col items-center gap-4 mb-8">
-        <Avatar
-          src={avatarUrl}
-          fallback={displayName}
-          size="xl"
-        />
+        <Avatar src={avatarUrl} fallback={displayName} size="xl" />
         <div className="text-center space-y-1">
           <h1 className="text-xl font-bold text-foreground">{displayName}</h1>
           <p className="text-sm text-muted-foreground">{user.email}</p>
@@ -99,9 +95,9 @@ export default function ProfilePage() {
       {/* Stats (placeholder) */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {[
-          { label: 'Videos', value: '0' },
-          { label: 'Seguidores', value: '0' },
-          { label: 'Siguiendo', value: '0' },
+          { label: "Videos", value: "0" },
+          { label: "Seguidores", value: "0" },
+          { label: "Siguiendo", value: "0" },
         ].map((stat) => (
           <div
             key={stat.label}
@@ -115,12 +111,12 @@ export default function ProfilePage() {
 
       {/* Actions */}
       <div className="space-y-3">
-        <Button variant="secondary" fullWidth size="md">
+        <Button variant="secondary" block size="md">
           Editar perfil
         </Button>
         <Button
           variant="danger"
-          fullWidth
+          block
           size="md"
           loading={loggingOut}
           onClick={handleLogout}

@@ -20,7 +20,7 @@
 }
 
 :root {
-  --background: #070b13;
+  --background: #000000;
   --foreground: #fafafa;
   --card: #0e1626;
   --card-hover: #16223b;
@@ -94,24 +94,41 @@ body {
 
 /* Animate fade in */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(100%); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-slide-up {
   animation: slideUp 0.3s ease-out;
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(255, 106, 0, 0.15); }
-  50% { box-shadow: 0 0 30px rgba(255, 106, 0, 0.3); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 106, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 106, 0, 0.3);
+  }
 }
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;

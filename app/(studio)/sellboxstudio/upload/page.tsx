@@ -8,7 +8,9 @@ import {
   RatioIcon,
   FileVideo,
   CloudUpload,
+  Plus,
 } from "lucide-react";
+import Button from "@/components/ui/Button";
 
 export default function StudioUploadPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -27,25 +29,19 @@ export default function StudioUploadPage() {
     [isDragging],
   );
 
-  const handleDragLeave = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setIsDragging(false);
-    },
-    [],
-  );
+  const handleDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
 
-  const handleDrop = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setIsDragging(false);
-      // Files handling will be implemented later
-      // const files = e.dataTransfer.files;
-    },
-    [],
-  );
+  const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    // Files handling will be implemented later
+    // const files = e.dataTransfer.files;
+  }, []);
 
   const handleFileChange = useCallback(
     (_e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,14 +66,12 @@ export default function StudioUploadPage() {
     {
       icon: <MonitorPlay className="w-5 h-5 text-muted-foreground" />,
       title: "Resoluciones de video",
-      description:
-        "Alta resolución recomendada: 1080p, 1440p, 4K.",
+      description: "Alta resolución recomendada: 1080p, 1440p, 4K.",
     },
     {
       icon: <RatioIcon className="w-5 h-5 text-muted-foreground" />,
       title: "Relación de aspecto",
-      description:
-        "Recomendado: 16:9 para horizontal, 9:16 para vertical.",
+      description: "Recomendado: 16:9 para horizontal, 9:16 para vertical.",
     },
   ];
 
@@ -127,22 +121,9 @@ export default function StudioUploadPage() {
         <p className="text-sm text-muted-foreground mb-6">
           O arrastra y suelta aquí
         </p>
-
-        {/* Select Button */}
-        <button
-          onClick={handleSelectClick}
-          className="
-            px-8 py-3 rounded-lg text-sm font-semibold text-white
-            transition-all duration-200
-            hover:scale-[1.03] active:scale-[0.98]
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background
-          "
-          style={{
-            background: "linear-gradient(135deg, #ff8c00 0%, #ff5100 100%)",
-          }}
-        >
+        <Button variant="primary" onClick={handleSelectClick} size="lg">
           Seleccionar video
-        </button>
+        </Button>
       </div>
 
       {/* Info bar */}

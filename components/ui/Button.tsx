@@ -1,33 +1,32 @@
-'use client';
+"use client";
 
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
-  fullWidth?: boolean;
+  block?: boolean;
   children: ReactNode;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-[image:var(--gradient-brand)] hover:bg-[image:var(--gradient-brand-hover)] text-white shadow-lg shadow-accent/20',
+    "bg-[image:var(--gradient-brand)] hover:bg-[image:var(--gradient-brand-hover)] text-white shadow-lg shadow-accent/20",
   secondary:
-    'bg-transparent border border-border hover:border-border-hover text-foreground hover:bg-card-hover',
-  ghost:
-    'bg-transparent hover:bg-card-hover text-foreground',
+    "bg-transparent border border-border hover:border-border-hover text-foreground hover:bg-card-hover",
+  ghost: "bg-transparent hover:bg-card-hover text-foreground",
   danger:
-    'bg-danger/10 hover:bg-danger/20 text-danger border border-danger/20 hover:border-danger/40',
+    "bg-danger/10 hover:bg-danger/20 text-danger border border-danger/20 hover:border-danger/40",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-xs rounded-lg gap-1.5',
-  md: 'px-4 py-2 text-sm rounded-xl gap-2',
-  lg: 'px-6 py-3 text-base rounded-xl gap-2.5',
+  sm: "px-3 py-1.5 text-xs rounded-lg gap-1.5",
+  md: "px-4 py-2 text-sm rounded-xl gap-2",
+  lg: "px-6 py-3 text-base rounded-xl gap-2.5",
 };
 
 const Spinner = () => (
@@ -56,16 +55,16 @@ const Spinner = () => (
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = 'primary',
-      size = 'md',
+      variant = "primary",
+      size = "md",
       loading = false,
-      fullWidth = false,
+      block = false,
       disabled,
       children,
-      className = '',
+      className = "",
       ...props
     },
-    ref
+    ref,
   ) => {
     const isDisabled = disabled || loading;
 
@@ -81,7 +80,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
           ${variantStyles[variant]}
           ${sizeStyles[size]}
-          ${fullWidth ? 'w-full' : ''}
+          ${block ? "w-full" : ""}
           ${className}
         `.trim()}
         {...props}
@@ -90,9 +89,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     );
-  }
+  },
 );
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 export default Button;

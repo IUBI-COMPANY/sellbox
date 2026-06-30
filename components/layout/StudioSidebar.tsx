@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 import type { ReactNode } from "react";
+import Button from "@/components/ui/Button";
 
 interface NavItem {
   href: string;
@@ -65,7 +66,7 @@ export default function StudioSidebar() {
       <div className="flex flex-col h-full">
         {/* Header: Logo */}
         <div className="h-14 flex items-center px-5 border-b border-border shrink-0">
-          <Link href="/sellboxstudio" className="flex items-center gap-2 group">
+          <Link href="/sellboxstudio" className="flex items-center group">
             <Logo size="sm" />
             <span className="text-sm font-semibold text-muted-foreground tracking-wide">
               Studio
@@ -78,12 +79,11 @@ export default function StudioSidebar() {
           <Link
             href="/sellboxstudio/upload"
             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-            style={{
-              background: "linear-gradient(135deg, #ff8c00 0%, #ff5100 100%)",
-            }}
           >
-            <Plus className="w-4 h-4" />
-            Subir
+            <Button variant="primary" block>
+              <Plus className="w-4 h-4" />
+              Subir
+            </Button>
           </Link>
         </div>
 
