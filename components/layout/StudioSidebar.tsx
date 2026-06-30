@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BarChart3,
   ChevronLeft,
   FileVideo,
   Home,
@@ -38,11 +37,6 @@ const navSections: NavSection[] = [
         href: "/sellboxstudio/posts",
         label: "Publicaciones",
         icon: <FileVideo className="w-[18px] h-[18px]" />,
-      },
-      {
-        href: "/sellboxstudio/analytics",
-        label: "Analíticas",
-        icon: <BarChart3 className="w-[18px] h-[18px]" />,
       },
       {
         href: "/sellboxstudio/comments",
