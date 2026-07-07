@@ -15,7 +15,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- ============================================================================
 
 CREATE TYPE user_role AS ENUM ('user', 'seller', 'admin');
-CREATE TYPE video_status AS ENUM ('processing', 'ready', 'error');
+CREATE TYPE video_status AS ENUM ('pending','processing','ready','error');
 
 -- ============================================================================
 -- 3. TABLES
@@ -34,7 +34,7 @@ CREATE TABLE public.users (
   is_verified     BOOLEAN DEFAULT false,
   follower_count  INT DEFAULT 0,
   following_count INT DEFAULT 0,
-  like_count     INT DEFAULT 0,
+  like_count      INT DEFAULT 0,
   created_at      TIMESTAMPTZ DEFAULT now(),
   updated_at      TIMESTAMPTZ DEFAULT now()
 );

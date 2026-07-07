@@ -2,13 +2,11 @@
 
 import { useCallback, useRef, useState } from "react";
 import {
-  Upload,
+  CloudUpload,
+  FileVideo,
   Film,
   MonitorPlay,
   RatioIcon,
-  FileVideo,
-  CloudUpload,
-  Plus,
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 
