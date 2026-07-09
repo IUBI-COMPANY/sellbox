@@ -32,7 +32,9 @@ const tabs: Tab[] = [
 export default function BottomTabs() {
   const pathname = usePathname();
   const isHome = pathname === '/';
-
+  const isExplore = pathname === '/explore';
+  
+  if (isExplore) return null;
   return (
     <nav 
       className={`
