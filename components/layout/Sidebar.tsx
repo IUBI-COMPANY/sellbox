@@ -21,7 +21,7 @@ interface NavItem {
   icon: ReactNode;
 }
 
-const navItems: NavItem[] = [
+export const navItems: NavItem[] = [
   { href: "/", label: "Inicio", icon: <Home className="w-5 h-5" /> },
   {
     href: "/following",
