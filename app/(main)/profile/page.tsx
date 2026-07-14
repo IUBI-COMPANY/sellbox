@@ -6,11 +6,13 @@ import { LogOut, User as UserIcon } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
 import Button from "@/components/ui/Button";
 import type { User } from "@supabase/supabase-js";
+import RegisterModal from "@/components/layout/RegisterModal";
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [loggingOut, setLoggingOut] = useState(false);
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
 
   const supabase = createClient();
 
@@ -67,14 +69,22 @@ export default function ProfilePage() {
             <Button variant="primary" size="md">
               <a href="/login">Iniciar sesión</a>
             </Button>
-            <Button variant="secondary" size="md">
-              <a href="/register">Crear cuenta</a>
+            <Button variant="secondary" size="md"
+              onClick={() => setOpenRegisterModal(true)}>
+              <span>Crear cuenta</span>
             </Button>
           </div>
         </div>
+        {
+          openRegisterModal && (
+            <RegisterModal onClose={() => setOpenRegisterModal(false)} />
+          )
+        }
+
       </div>
     );
   }
+
 
   // Logged in
   const displayName =
