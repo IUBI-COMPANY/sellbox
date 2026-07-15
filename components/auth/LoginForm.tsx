@@ -207,7 +207,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
                             d="M5.35 12.93c-.24-.72-.38-1.49-.38-2.28s.14-1.56.38-2.28L1.39 7.3C.5 9.07 0 11.04 0 13.1c0 2.06.5 4.03 1.39 5.8l3.96-3.07c-.24-.72-.38-1.49-.38-2.28z"
                         />
                     </svg>
-                    <span>Registrarse con Google</span>
+                    <span>Iniciar sesion con Google</span>
                 </button>
 
         {/* Register link */}
