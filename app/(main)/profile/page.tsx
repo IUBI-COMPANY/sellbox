@@ -7,12 +7,14 @@ import Avatar from "@/components/ui/Avatar";
 import Button from "@/components/ui/Button";
 import type { User } from "@supabase/supabase-js";
 import RegisterModal from "@/components/layout/RegisterModal";
+import LoginModal from "@/components/layout/LoginModal";
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [loggingOut, setLoggingOut] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false)
 
   const supabase = createClient();
 
@@ -66,8 +68,9 @@ export default function ProfilePage() {
           </div>
 
           <div className="flex gap-3">
-            <Button variant="primary" size="md">
-              <a href="/login">Iniciar sesión</a>
+            <Button variant="primary" size="md"
+              onClick={() => setOpenLoginModal(true)}>
+              Iniciar Sesión
             </Button>
             <Button variant="secondary" size="md"
               onClick={() => setOpenRegisterModal(true)}>
@@ -78,6 +81,12 @@ export default function ProfilePage() {
         {
           openRegisterModal && (
             <RegisterModal onClose={() => setOpenRegisterModal(false)} />
+          )
+        }
+
+        {
+          openLoginModal && (
+            <LoginModal onClose={() => setOpenLoginModal(false)} />
           )
         }
 
