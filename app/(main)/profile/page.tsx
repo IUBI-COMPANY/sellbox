@@ -2,19 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { LogOut, User as UserIcon } from "lucide-react";
+import { LogOut, User as UserIcon, PencilLine, Heart, Table, Bookmark, History, MoreVertical } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
 import Button from "@/components/ui/Button";
 import type { User } from "@supabase/supabase-js";
 import RegisterModal from "@/components/layout/RegisterModal";
 import LoginModal from "@/components/layout/LoginModal";
 
+import EditProfileModal from "@/components/layout/EditProfileModal";
+
+export interface ProfileData {
+  id: string;
+  username: string;
+  full_name: string;
+  avatar_url: string;
+
+}
+
+type TabType = "videos" | "likes" | "favorites" | "history";
+
+
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [loggingOut, setLoggingOut] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
+
   const [openLoginModal, setOpenLoginModal] = useState(false)
+
+  const [tab, setTab] = useState<TabType>("videos");
+  const [showMenu, setShowMenu] = useState(false);
+  const [openEditProfile, setOpenEditProfile] = useState(false)
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+
 
   const supabase = createClient();
 
@@ -25,6 +45,15 @@ export default function ProfilePage() {
           data: { user: authUser },
         } = await supabase.auth.getUser();
         setUser(authUser);
+
+        if (authUser) {
+          const { data: profileData, error } = await supabase.from("profiles").select("*").eq("id", authUser.id).single();
+
+          if (!error && profileData) {
+            setProfile(profileData as ProfileData)
+          }
+        }
+
       } catch {
         // Supabase not configured
       } finally {
@@ -96,17 +125,48 @@ export default function ProfilePage() {
 
 
   // Logged in
-  const displayName =
-    user.user_metadata?.full_name || user.email?.split("@")[0] || "Usuario";
-  const avatarUrl = user.user_metadata?.avatar_url as string | undefined;
+  const displayName = profile?.full_name || user.user_metadata?.full_name || user.email?.split("@")[0] || "Usuario";
+  const avatarUrl = profile?.avatar_url || (user.user_metadata?.avatar_url as string | undefined);
 
   return (
-    <div className="max-w-lg mx-auto px-4 py-8 animate-fade-in">
+    <div className="relative max-w-lg mx-auto px-4 py-8 animate-fade-in">
+      <div className="absolute right-4 top-4">
+        <button
+          onClick={() => setShowMenu(!showMenu)}
+          className="p-2 hover:bg-card border border-transparent hover:border-border rounded-full transition-all duration-200 cursor-pointer text-foreground"
+        >
+          <MoreVertical className="w-6 h-6" />
+        </button>
+
+
+        {showMenu && (
+          <div className="absolute right-0 mt-2 w-48 rounded-xl bg-card border border-border p-2 ">
+            <Button
+              variant="danger"
+              block
+              size="sm"
+              loading={loggingOut}
+              onClick={handleLogout}
+              className="flex items-center justify-center gap-2"
+            >
+              <LogOut className="w-4 h-4" />
+              Cerrar sesión
+            </Button>
+          </div>
+        )}
+      </div>
+
       {/* Profile header */}
       <div className="flex flex-col items-center gap-4 mb-8">
         <Avatar src={avatarUrl} fallback={displayName} size="xl" />
         <div className="text-center space-y-1">
-          <h1 className="text-xl font-bold text-foreground">{displayName}</h1>
+          <div className="flex justify-center items-center gap-5">
+            <h1 className="text-xl font-bold text-foreground">{displayName}</h1>
+            <button
+              onClick={() => setOpenEditProfile(true)}>
+              <PencilLine className="w-4 h-4" />
+            </button>
+          </div>
           <p className="text-sm text-muted-foreground">{user.email}</p>
         </div>
       </div>
@@ -128,22 +188,66 @@ export default function ProfilePage() {
         ))}
       </div>
 
-      {/* Actions */}
-      <div className="space-y-3">
-        <Button variant="secondary" block size="md">
-          Editar perfil
-        </Button>
-        <Button
-          variant="danger"
-          block
-          size="md"
-          loading={loggingOut}
-          onClick={handleLogout}
-        >
-          <LogOut className="w-4 h-4" />
-          Cerrar sesión
-        </Button>
+
+      <div className="border-t border-b border-border py-2 mb-6">
+        <div className="grid grid-cols-4 justify-items-center w-full">
+          <button
+            onClick={() => setTab("videos")}
+            className={`p-2 rounded-lg  cursor-pointer ${tab === "videos" ? "text-foreground bg-card" : "text-muted hover:text-foreground"}`}
+          >
+            <Table className="w-6 h-6" />
+          </button>
+          <button
+            onClick={() => setTab("likes")}
+            className={`p-2 rounded-lg  cursor-pointer ${tab === "likes" ? "text-foreground bg-card" : "text-muted hover:text-foreground"}`}
+          >
+            <Heart className="w-6 h-6" />
+          </button>
+          <button
+            onClick={() => setTab("favorites")}
+            className={`p-2 rounded-lg  cursor-pointer ${tab === "favorites" ? "text-foreground bg-card" : "text-muted hover:text-foreground"}`}
+          >
+            <Bookmark className="w-6 h-6" />
+          </button>
+          <button
+            onClick={() => setTab("history")}
+            className={`p-2 rounded-lg  cursor-pointer ${tab === "history" ? "text-foreground bg-card" : "text-muted hover:text-foreground"}`}
+          >
+            <History className="w-6 h-6" />
+          </button>
+        </div>
       </div>
+
+      <div >
+        {tab === "videos" && (
+          <div className="text-center py-8 text-sm text-muted-foreground">Videos publicados</div>
+        )}
+        {tab === "likes" && (
+          <div className="text-center py-8 text-sm text-muted-foreground">Videos que te gustan</div>
+        )}
+        {tab === "favorites" && (
+          <div className="text-center py-8 text-sm text-muted-foreground">Videos guardados como favoritos</div>
+        )}
+        {tab === "history" && (
+          <div className="text-center py-8 text-sm text-muted-foreground">Historial de visualizacion</div>
+        )}
+      </div>
+
+
+      {
+        openEditProfile && (
+          <EditProfileModal
+            initialData={{
+              id: profile?.id || user?.id || "",
+              username: profile?.username || "",
+              full_name: profile?.full_name || user?.user_metadata?.full_name || "",
+              avatar_url: profile?.avatar_url || user?.user_metadata?.avatar_url || ""
+            }}
+            onClose={() => setOpenEditProfile(false)}
+            onProfileUpdate={(updatedProfile) => setProfile(updatedProfile)}
+          />
+        )}
+      
     </div>
   );
 }
